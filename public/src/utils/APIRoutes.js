@@ -1,4 +1,4 @@
-export const host = "http://localhost:5001";
+export const host = "https://chat-app-api-hpxq.onrender.com";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
