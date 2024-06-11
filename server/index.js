@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const userRoutes = require("../routes/userRoutes");
-const messageRoutes = require("../routes/messageRoutes");
+const userRoutes = require("./routes/userRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const socket = require("socket.io");
 const app = express();
 require("dotenv").config();
@@ -10,7 +10,6 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => res.json("Hello"));
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
@@ -25,7 +24,7 @@ const server = app.listen(process.env.PORT, () => {
 
 const io = socket(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://chat-app-gold-eight.vercel.app"],
+    origin: ["http://localhost:3000", "https://chat-app-jj7z.onrender.com"],
     credentials: true,
   },
 });
