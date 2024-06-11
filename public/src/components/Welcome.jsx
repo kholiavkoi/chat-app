@@ -20,6 +20,9 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   color: #fff;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
   img {
     height: 20rem;
   }

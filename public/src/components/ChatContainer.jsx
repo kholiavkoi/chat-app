@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Logout from "./Logout";
 import ChatInput from "./ChatInput";
 import axios from "axios";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
+import { FaPeopleGroup } from "react-icons/fa6";
 
-const ChatContainer = ({ currentChat, currentUser, socket }) => {
+const ChatContainer = ({
+  currentChat,
+  currentUser,
+  socket,
+  setCurrentChat,
+}) => {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
@@ -66,13 +71,16 @@ const ChatContainer = ({ currentChat, currentUser, socket }) => {
               src={`data:image/svg+xml;base64,${currentChat?.avatarImage}`}
               alt="avatar"
             />
-          </div>
-          <div className="username">
             <h3>{currentChat?.username}</h3>
           </div>
+          <span
+            onClick={() => {
+              setCurrentChat(null);
+            }}
+          >
+            <FaPeopleGroup />
+          </span>
         </div>
-
-        <Logout />
       </div>
       <div className="chat-messages">
         {messages.map((message) => (
@@ -101,18 +109,31 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    @media (max-width: 768px) {
+      padding: 0;
+    }
     .user-details {
       display: flex;
       align-items: center;
       gap: 1rem;
+      justify-content: space-between;
+      width: 100%;
       .avatar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         img {
           height: 3rem;
         }
-      }
-      .username {
         h3 {
           color: #fff;
+        }
+      }
+      span {
+        color: white;
+        cursor: pointer;
+        svg {
+          font-size: 1.5rem;
         }
       }
     }
@@ -123,8 +144,10 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     overflow-y: auto;
-    max-height: 70vh;
     flex: 1;
+    @media (max-width: 768px) {
+      padding: 0;
+    }
     .message {
       display: flex;
       align-items: center;

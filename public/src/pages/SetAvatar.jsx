@@ -74,7 +74,7 @@ const SetAvatar = () => {
     <>
       {isLoading ? (
         <Container>
-          <img src={loader} alt="loader" />
+          <img src={loader} alt="loader" className="loader" />
         </Container>
       ) : (
         <Container>
@@ -116,17 +116,23 @@ const Container = styled.div`
   background-color: #131324;
   height: 100vh;
   width: 100vw;
+  padding: 1rem;
   .loader {
     max-inline-size: 100%;
   }
   .title-container {
     h1 {
       color: #fff;
+      text-align: center;
     }
   }
   .avatars {
     display: flex;
     gap: 2rem;
+    @media (max-width: 768px) {
+      padding: 0.5rem;
+      gap: 1rem;
+    }
     .avatar {
       border: 0.4rem solid transparent;
       padding: 0.4rem;
@@ -135,8 +141,14 @@ const Container = styled.div`
       justify-content: center;
       align-items: center;
       transition: 0.5s ease-in-out;
+      @media (max-width: 768px) {
+        padding: 0;
+      }
       img {
         height: 6rem;
+        @media (max-width: 768px) {
+          height: 3.5rem;
+        }
       }
     }
     .selected {

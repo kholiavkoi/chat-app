@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { loginRoute } from "../utils/APIRoutes";
@@ -124,6 +124,9 @@ const FormContainer = styled.div`
     background-color: #00000076;
     border-radius: 2rem;
     padding: 3rem 5rem;
+    @media (max-width: 768px) {
+      padding: 2rem;
+    }
     input {
       background-color: transparent;
       padding: 1rem;

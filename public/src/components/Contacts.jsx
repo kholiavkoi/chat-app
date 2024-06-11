@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
+import Logout from "./Logout";
 
 const Contacts = ({ contacts, currentUser, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -55,11 +56,10 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
                 alt="avatar"
               />
-            </div>
-
-            <div className="username">
               <h2>{currentUserName}</h2>
             </div>
+
+            <Logout />
           </div>
         </Container>
       )}
@@ -78,7 +78,7 @@ const Container = styled.div`
     justify-content: center;
     gap: 1rem;
     img {
-      height: 2rem;
+      height: 3rem;
     }
     h3 {
       color: #fff;
@@ -126,18 +126,20 @@ const Container = styled.div`
     }
   }
   .current-user {
+    padding-inline: 20px;
     background-color: #0d0d30;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 2rem;
     .avatar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       img {
         height: 4rem;
         max-inline-size: 100%;
       }
-    }
-    .username {
       h2 {
         color: #fff;
       }

@@ -11,7 +11,7 @@ import { io } from "socket.io-client";
 const Chat = () => {
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
-  const [currentChat, setCurrentChat] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(null);
   const navigate = useNavigate();
   const socket = useRef();
 
@@ -51,18 +51,21 @@ const Chat = () => {
   return (
     <Container>
       <div className="container">
-        <Contacts
-          contacts={contacts}
-          currentUser={currentUser}
-          changeChat={handleChatChange}
-        />
-        {currentChat === undefined ? (
+        {!(window.innerWidth < 768 && currentChat) && (
+          <Contacts
+            contacts={contacts}
+            currentUser={currentUser}
+            changeChat={handleChatChange}
+          />
+        )}
+        {currentChat === null ? (
           <Welcome currentUser={currentUser} />
         ) : (
           <ChatContainer
             currentUser={currentUser}
             currentChat={currentChat}
             socket={socket}
+            setCurrentChat={setCurrentChat}
           />
         )}
       </div>
@@ -88,6 +91,11 @@ const Container = styled.div`
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;
+    }
+    @media screen and (max-width: 768px) {
+      max-height: 100dvh;
+      width: 100vw;
+      grid-template-columns: 100%;
     }
   }
 `;
