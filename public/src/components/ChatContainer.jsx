@@ -15,6 +15,7 @@ const ChatContainer = ({
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
+
   const handleSendMsg = async (msg) => {
     await axios.post(sendMessageRoute, {
       from: currentUser._id,
@@ -73,13 +74,16 @@ const ChatContainer = ({
             />
             <h3>{currentChat?.username}</h3>
           </div>
-          <span
-            onClick={() => {
-              setCurrentChat(null);
-            }}
-          >
-            <FaPeopleGroup />
-          </span>
+
+          {window.innerWidth < 768 && (
+            <span
+              onClick={() => {
+                setCurrentChat(null);
+              }}
+            >
+              <FaPeopleGroup />
+            </span>
+          )}
         </div>
       </div>
       <div className="chat-messages">
@@ -101,16 +105,16 @@ const ChatContainer = ({
 };
 
 const Container = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 12% 76% 12%;
+  overflow: hidden;
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
     @media (max-width: 768px) {
-      padding: 0;
+      padding: 1rem;
     }
     .user-details {
       display: flex;
@@ -144,15 +148,14 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     overflow-y: auto;
-    flex: 1;
     @media (max-width: 768px) {
-      padding: 0;
+      padding-inline: 1rem;
     }
     .message {
       display: flex;
       align-items: center;
       .content {
-        max-width: 40%;
+        max-width: 70%;
         overflow-wrap: break-word;
         padding: 1rem;
         font-size: 1.1rem;

@@ -49,13 +49,13 @@ const ChatInput = ({ handleSendMsg }) => {
 };
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 10% 90%;
+  display: flex;
   align-items: center;
+  gap: 1rem;
   background-color: #080420;
   padding: 0 2rem 0.3rem;
   @media (max-width: 768px) {
-    padding: 0;
+    padding-inline: 1rem;
   }
   .button-container {
     display: flex;
