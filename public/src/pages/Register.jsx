@@ -114,7 +114,7 @@ const Register = () => {
           />
 
           <button type="submit">Create User</button>
-          <span>
+          <span className="logreg">
             Already have an account? <Link to="/login">Login</Link>
           </span>
         </form>
@@ -155,6 +155,7 @@ const FormContainer = styled.div`
     padding: 3rem 5rem;
     @media (max-width: 768px) {
       padding: 2rem;
+      width: 90%;
     }
     input {
       background-color: transparent;
@@ -184,9 +185,10 @@ const FormContainer = styled.div`
         background-color: #4e0eff;
       }
     }
-    span {
+    .logreg {
       color: #fff;
       text-transform: uppercase;
+      text-align: center;
       a {
         color: #4e0eff;
         text-decoration: none;

@@ -85,7 +85,7 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
           <button type="submit">Login</button>
-          <span>
+          <span className="logreg">
             Don't have an account? <Link to="/register">Register</Link>
           </span>
         </form>
@@ -126,6 +126,7 @@ const FormContainer = styled.div`
     padding: 3rem 5rem;
     @media (max-width: 768px) {
       padding: 2rem;
+      width: 90%;
     }
     input {
       background-color: transparent;
@@ -155,9 +156,10 @@ const FormContainer = styled.div`
         background-color: #4e0eff;
       }
     }
-    span {
+    .logreg {
       color: #fff;
       text-transform: uppercase;
+      text-align: center;
       a {
         color: #4e0eff;
         text-decoration: none;
