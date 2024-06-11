@@ -114,7 +114,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 3rem;
   background-color: #131324;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   padding: 1rem;
   .loader {
