@@ -5,6 +5,7 @@ import axios from "axios";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { convertToUserTime } from "../utils/convertToUserTime";
 
 const ChatContainer = ({
   currentChat,
@@ -36,7 +37,6 @@ const ChatContainer = ({
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-receive", (msg) => {
-        console.log(msg);
         setArrivalMessage({ fromSelf: false, message: msg });
       });
     }
@@ -96,6 +96,9 @@ const ChatContainer = ({
               className={`message ${message.fromSelf ? "sended" : "received"}`}
             >
               <div className="content">
+                <span className="createdAt">
+                  {convertToUserTime(message.createdAt)}
+                </span>
                 <p>{message.message}</p>
               </div>
             </div>
@@ -164,12 +167,15 @@ const Container = styled.div`
         font-size: 1.1rem;
         border-radius: 1rem;
         color: #d1d1d1;
+        display: flex;
+        gap: 1rem;
       }
     }
     .sended {
       justify-content: flex-end;
       .content {
         background-color: #4f04ff21;
+        flex-direction: row-reverse;
       }
     }
     .received {
@@ -177,6 +183,13 @@ const Container = styled.div`
       .content {
         background-color: #9900ff20;
       }
+    }
+    .createdAt {
+      opacity: 0.7;
+      font-size: 0.7rem;
+      align-self: flex-end;
+      position: relative;
+      top: 0.2rem;
     }
   }
 `;
