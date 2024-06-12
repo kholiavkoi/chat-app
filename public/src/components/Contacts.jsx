@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.png";
 import Logout from "./Logout";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const Contacts = ({ contacts, currentUser, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -28,6 +29,26 @@ const Contacts = ({ contacts, currentUser, changeChat }) => {
             <h3>Chatty</h3>
           </div>
           <div className="contacts">
+            <div
+              onClick={() =>
+                changeCurrentChat("general", {
+                  username: "General",
+                  avatarImage: "",
+                  _id: "general",
+                })
+              }
+              className={`contact ${
+                currentSelected === "general" ? "selected" : ""
+              }`}
+            >
+              <span>
+                <FaPeopleGroup />
+              </span>
+
+              <div className="username">
+                <h3>General</h3>
+              </div>
+            </div>
             {contacts.map((contact, index) => (
               <div
                 onClick={() => changeCurrentChat(index, contact)}
@@ -110,6 +131,13 @@ const Container = styled.div`
       align-items: center;
       display: flex;
       transition: 0.5s ease-in-out;
+      span {
+        color: #fff;
+        padding: 0.5rem;
+        svg {
+          font-size: 2rem;
+        }
+      }
       .avatar {
         img {
           height: 3rem;

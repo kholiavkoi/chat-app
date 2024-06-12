@@ -18,19 +18,32 @@ module.exports.addMessage = async (req, res, next) => {
 module.exports.getAllMessages = async (req, res, next) => {
   try {
     const { from, to } = req.body;
-    const messages = await messageModel
-      .find({
-        users: {
-          $all: [from, to],
-        },
-      })
-      .sort({ updatedAt: 1 });
+    let messages;
+
+    if (to === "general") {
+      messages = await messageModel
+        .find({
+          users: to,
+        })
+        .sort({ updatedAt: 1 });
+    } else {
+      messages = await messageModel
+        .find({
+          users: {
+            $all: [from, to],
+          },
+        })
+        .sort({ updatedAt: 1 });
+    }
+
     const projectMessages = messages.map((msg) => {
       return {
         fromSelf: msg.sender.toString() === from,
         message: msg.message.text,
+        createdAt: msg.createdAt,
       };
     });
+
     res.json(projectMessages);
   } catch (error) {
     next(error);
