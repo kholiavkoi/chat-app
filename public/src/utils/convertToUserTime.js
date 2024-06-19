@@ -7,6 +7,6 @@ export function convertToUserTime(serverTime) {
   // Convert server time to user's local time zone
   const userTime = moment.tz(serverTime, "UTC").tz(userTimeZone);
 
-  // Format the time as desired (e.g., YYYY-MM-DD HH:mm:ss)
+  // Format the time as desired
   return userTime.format("HH:mm");
 }
